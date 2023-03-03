@@ -93,7 +93,7 @@ TiDE can be used in various environments. Below are the prerequisites and instru
    3. Above command will switch the command line prompt to Shell of the TiDE image. Execute the following in the Container Shell
 
        ```
-       java -jar /opt/deid/target/deid-3.0.28-SNAPSHOT-dataflow.jar --deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=text --phiFileName=/workspaces/phi/phi_person_data_example.csv --personFile=/workspaces/person_data/person.csv --inputResource=/workspaces/sample_notes --outputResource=/workspaces/output
+      java -jar /opt/deid/target/deid-3.0.28-SNAPSHOT-dataflow.jar --deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=text --phiFileName=/workspaces/phi/phi_person_data_example.csv --personFile=/workspaces/person_data/person.csv --inputResource=/workspaces/sample_notes --outputResource=/workspaces/output
        ```
 
    4. [Sample Input](#Sample-Input-Local)
@@ -378,7 +378,7 @@ deidJobs:
         action: replace_minimumlengthword_with
         actionParam: 999999999 3
         fields: pat_id, birth_wrist_band, epic_pat_id, PRIM_CVG_ID, PRIM_EPP_ID, EMPLOYER_ID
-        ...
+        ......
 
 ```
 
