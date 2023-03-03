@@ -50,7 +50,7 @@ TiDE can be used in various environments. Below are the prerequisites and instru
 
 ### Using TiDE
 
-   The following examples are based on executing TiDE on windows system
+   The following examples are based on executing TiDE on a Windows system
 
    Once prerequisites are met, open a command line and change the directory to the folder where TiDE source has been downloaded, e.g. if on local system, source is downloaded at "C:\Dev\tide-source" navigate to the folder
 
@@ -67,10 +67,10 @@ TiDE can be used in various environments. Below are the prerequisites and instru
 
    1. In the command window, execute the following
 
-   ```
-   mvn clean install -DskipTests
-   java -jar ./target/deid-3.0.21-SNAPSHOT-dataflow.jar --deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=text --phiFileName=./phi/phi_person_data_example.csv --personFile=./person_data/person.csv --inputResource=./sample_notes --outputResource=./output
-   ```
+       ```
+       mvn clean install -DskipTests
+       java -jar ./target/deid-3.0.21-SNAPSHOT-dataflow.jar --deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=text --phiFileName=./phi/phi_person_data_example.csv --personFile=./person_data/person.csv --inputResource=./sample_notes --outputResource=./output
+       ```
 
    2. [Sample Input](#Sample-Input-Local)
 
@@ -80,23 +80,21 @@ TiDE can be used in various environments. Below are the prerequisites and instru
 
    1. In the command window, execute the following
 
-   ```
-   docker build . -t tide-program:latest
-   ```
+       ```
+       docker build . -t tide-program:latest
+       ```
 
    2. Update the following command if the source location is different from (C:\Dev\tide-source). This command will map the local source and output folder with container. Execute the following
 
-   ```
-   docker run -it -v /mnt/c/Dev/tide-source:/workspaces tide-program:latest
-   ```
+       ```
+       docker run -it -v /mnt/c/Dev/tide-source:/workspaces tide-program:latest
+       ```
 
    3. Above command will switch the command line prompt to Shell of the TiDE image. Execute the following in the Container Shell
 
-   ```java
-
-   java -jar /opt/deid/target/deid-3.0.21-SNAPSHOT-dataflow.jar --deidConfigFile=/workspaces/src/main/resources/--deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=text --phiFileName=/workspaces/phi/phi_person_data_example.csv --personFile=/workspaces/person_data/person.csv --inputResource=/workspaces/sample_notes --outputResource=/workspaces/output
-
-   ```
+       ```
+       java -jar /opt/deid/target/deid-3.0.21-SNAPSHOT-dataflow.jar --deidConfigFile=/workspaces/src/main/resources/--deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=text --phiFileName=/workspaces/phi/phi_person_data_example.csv --personFile=/workspaces/person_data/person.csv --inputResource=/workspaces/sample_notes --outputResource=/workspaces/output
+       ```
 
    4. [Sample Input](#Sample-Input-Local)
    5. [TiDE Output - Local or container](#Output-Local)
@@ -105,22 +103,21 @@ TiDE can be used in various environments. Below are the prerequisites and instru
 
    1. In the command window, execute the following
 
-   ```
-   docker build . -t tide-program:latest
-   ```
+       ```
+       docker build . -t tide-program:latest
+       ```
 
    2. Update the following command if the source location is different from (C:\Dev\tide-source). This command will map the local source and output folder with container. Execute the following
 
-   ```
-   docker run -it -v /mnt/c/Dev/tide-source:/workspaces tide-program:latest
-   ```
+       ```
+       docker run -it -v /mnt/c/Dev/tide-source:/workspaces tide-program:latest
+       ```
 
    3. Above command will switch the command line prompt to Shell of the TiDE image. Execute the following in the Container Shell
 
-   
-   ```java
-    java -jar -Xmx6g /opt/deid/target/deid-3.0.21-SNAPSHOT-dataflow.jar --deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=gcp_gcs --inputResource=gs://<INPUT_BUCKET_NAME>/sample_notes_jsonl/notes.json --outputResource=gs://<OUTPUT_BUCKET_NAME> --gcpCredentialsKeyFile=<SERVICE_ACCOUNT_KEY_DOWNLOADED> --textIdFields="id" --textInputFields="note"
-   ```
+       ```
+        java -jar -Xmx6g /opt/deid/target/deid-3.0.21-SNAPSHOT-dataflow.jar --deidConfigFile=./src/main/resources/deid_config_omop_genrep.yaml --annotatorConfigFile=./src/main/resources/annotator_config.yaml --inputType=gcp_gcs --inputResource=gs://<INPUT_BUCKET_NAME>/sample_notes_jsonl/notes.json --outputResource=gs://<OUTPUT_BUCKET_NAME> --gcpCredentialsKeyFile=<SERVICE_ACCOUNT_KEY_DOWNLOADED> --textIdFields="id" --textInputFields="note"
+       ```
 
    4. [Sample Input](#Sample-Input-GCP)
    5. [TiDE Output - GCP](#Output-GCP)
@@ -314,7 +311,7 @@ Options to deid PHI discovered by TiDE:
 
 TiDE has some embedded job specifications ([resource folder](src/main/resources)) that fit for most common use cases.
 
-If need to customize the configuration, create a new config yaml file, and use the file path as argument value of --deidConfigFile when run the tool.
+If customization of the configuration is needed, create a new config yaml file, and use the file path as argument value of `--deidConfigFile` when run the tool.
 
 ## Deid Config YAML file
 
@@ -381,7 +378,7 @@ deidJobs:
         action: replace_minimumlengthword_with
         actionParam: 999999999 3
         fields: pat_id, birth_wrist_band, epic_pat_id, PRIM_CVG_ID, PRIM_EPP_ID, EMPLOYER_ID
-        .....
+        ...
 
 ```
 
@@ -404,7 +401,7 @@ Three types of parameters are needed for running TiDE:
 |textInputFields |field name in input that contains free text | note_text|
 |textIdFields |field name in input that contains row id(s) | note_id,note_csn_id|
 | runner | type of the Apache Beam runner | DirectRunner, DataflowRunner |
-|inputType    | type of the input souce. Currently supports Google Cloud Storage, Google BigQuery and local files  | gcp_gcs, gcp_bq, local, text |
+|inputType    | type of the input source. Currently supports Google Cloud Storage, Google BigQuery and local files  | gcp_gcs, gcp_bq, local, text |
 |inputResource | Path of the file to read from | gs://mybucket/path/to/json/files/*.json|
 |outputResource | Path of the output files | |
 |DeidConfigFile | Name of the Deid configuration. Can use the provided configurations or external config file | deid_config_omop_genrep.yaml |
